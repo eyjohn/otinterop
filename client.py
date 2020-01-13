@@ -8,10 +8,10 @@ tracer = Tracer()
 set_global_tracer(tracer)
 
 if len(sys.argv) != 4:
-    print("Usage: python testclient.py <host> <port> <path>")
+    print("Usage: python client.py <host> <port> <path>")
     sys.exit(1)
 
-with tracer.start_active_span("testclient") as scope:
+with tracer.start_active_span("client") as scope:
     scope.span.set_baggage_item("key", "val")
     client = SimpleHttpClient(sys.argv[1], int(sys.argv[2]))
     req = Request(sys.argv[3], None)
