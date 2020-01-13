@@ -1,6 +1,6 @@
 import sys
 
-from simplehttp import Request, Response, SimpleHttpClient
+from simplehttpclient import Request, Response, SimpleHttpClient
 
 from testtracer import Tracer
 from opentracing import set_global_tracer

@@ -3,7 +3,7 @@ import threading
 import time
 import sys
 
-from simplehttp import Request, Response, SimpleHttpServer
+from simplehttpserver import Request, Response, SimpleHttpServer
 
 from testtracer import Tracer
 from opentracing import set_global_tracer, global_tracer
