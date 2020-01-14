@@ -23,6 +23,7 @@ client = simplehttpclient.SimpleHttpClient(sys.argv[3], int(sys.argv[4]))
 def cb(r):
     resp = client.make_request(
         simplehttpclient.Request(path='/ping', data=None))
+    global_tracer().scope_manager.active.span.set_tag("app_tag", "value")
     return simplehttpserver.Response(200, ("Responding for: "+r.path+" ping service: "+repr(resp)).encode("ascii"))
 
 
