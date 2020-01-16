@@ -70,17 +70,17 @@ A span created within one platform that is propagated into another will create a
 
 ## Component Overview
 
-![Extension Component Diagram](https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggTFJcbnN1YmdyYXBoIFwiUHl0aG9uIEFwcGxpY2F0aW9uIChhcHAucHkpXCJcbiAgICBhcHBfY29kZVtBcHBsaWNhdGlvbiBDb2RlXVxuICAgIHRyYWNlcltMb2dnaW5nIFRyYWNlcl1cbiAgICBzdWJncmFwaCBcIkV4dGVuc2lvbiAgIChleHRlbnNpb24uc28pXCJcbiAgICAgICAgbmF0aXZlX2xpYnJhcnlbTmF0aXZlIExpYnJhcnldXG4gICAgICAgIGludGVyb3BfdHJhY2VyW05hdGl2ZSBJbnRlcm9wIFRyYWNlcl1cbiAgICBlbmRcbiAgICBhcHBfY29kZSAtLT4gbmF0aXZlX2xpYnJhcnlcbiAgICBhcHBfY29kZSAtLT4gdHJhY2VyXG4gICAgbmF0aXZlX2xpYnJhcnkgLS0-IGludGVyb3BfdHJhY2VyXG4gICAgaW50ZXJvcF90cmFjZXIgLS0-IHRyYWNlclxuZW5kIiwibWVybWFpZCI6eyJ0aGVtZSI6Im5ldXRyYWwifX0)
+![Extension Component Diagram](https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggTFJcbnN1YmdyYXBoIGFwcFtcIlB5dGhvbiBBcHBsaWNhdGlvbiAoYXBwLnB5KVwiXVxuICAgIGFwcF9jb2RlW0FwcGxpY2F0aW9uIENvZGVdXG4gICAgdHJhY2VyW0xvZ2dpbmcgVHJhY2VyXVxuICAgIHN1YmdyYXBoIGV4dGVuc2lvbltcIkV4dGVuc2lvbiAoZXh0ZW5zaW9uLnNvKVwiXVxuICAgICAgICBuYXRpdmVfbGlicmFyeVtOYXRpdmUgTGlicmFyeV1cbiAgICAgICAgaW50ZXJvcF90cmFjZXJbTmF0aXZlIEludGVyb3AgVHJhY2VyXVxuICAgIGVuZFxuICAgIGFwcF9jb2RlIC0tPiBuYXRpdmVfbGlicmFyeVxuICAgIGFwcF9jb2RlIC0tPiB0cmFjZXJcbiAgICBuYXRpdmVfbGlicmFyeSAtLT4gaW50ZXJvcF90cmFjZXJcbiAgICBpbnRlcm9wX3RyYWNlciAtLT4gdHJhY2VyXG5lbmRcbnN0eWxlIGV4dGVuc2lvbiBmaWxsOiNGRkEsc3Ryb2tlOiNBQTAiLCJtZXJtYWlkIjp7InRoZW1lIjoibmV1dHJhbCJ9fQ)
 
 <details><summary>Mermaid Code</summary>
 <p>
 
 ```mermaid
 graph LR
-subgraph "Python Application (app.py)"
+subgraph app["Python Application (app.py)"]
     app_code[Application Code]
-    tracer[Logging Tracer]
-    subgraph "Extension   (extension.so)"
+    tracer[Host Tracer]
+    subgraph extension["Extension (extension.so)"]
         native_library[Native Library]
         interop_tracer[Native Interop Tracer]
     end
@@ -89,10 +89,23 @@ subgraph "Python Application (app.py)"
     native_library --> interop_tracer
     interop_tracer --> tracer
 end
+style extension fill:#FFA,stroke:#AA0
 ```
 
 </p>
 </details>
+
+### Interop Tracer
+
+The "Interop" (Interoperability) Tracer is the main glue that provides the Tracer functionality to the guest platform (SpanContext creation, injection, extraction) as well as collecting the calls to the Tracing API for propagation to the host platform's Tracer.
+
+The implementation of such a Tracer which simply caches tracing calls until they are collected can be found here: [`otinterop_trace.h`](https://github.com/eyjohn/simplehttpclient-python/blob/master/src/otinterop_tracer.h) | [`otinterop_trace.cpp`](https://github.com/eyjohn/simplehttpclient-python/blob/master/src/otinterop_tracer.cpp)
+
+### Trace Collection
+
+The Extension is expected to determine when the collection should occur but is required to propagate at least the SpanContext of the active Span immediately presuming an active span is propagated.
+
+This proof of concept provides an example of the collection logic implemented for both a client and server version of the library and demonstrates how .... TODO
 
 ## Test Scenario
 
