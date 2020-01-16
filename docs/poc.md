@@ -72,6 +72,9 @@ A span created within one platform that is propagated into another will create a
 
 ![Extension Component Diagram](https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggTFJcbnN1YmdyYXBoIFwiUHl0aG9uIEFwcGxpY2F0aW9uIChhcHAucHkpXCJcbiAgICBhcHBfY29kZVtBcHBsaWNhdGlvbiBDb2RlXVxuICAgIHRyYWNlcltMb2dnaW5nIFRyYWNlcl1cbiAgICBzdWJncmFwaCBcIkV4dGVuc2lvbiAgIChleHRlbnNpb24uc28pXCJcbiAgICAgICAgbmF0aXZlX2xpYnJhcnlbTmF0aXZlIExpYnJhcnldXG4gICAgICAgIGludGVyb3BfdHJhY2VyW05hdGl2ZSBJbnRlcm9wIFRyYWNlcl1cbiAgICBlbmRcbiAgICBhcHBfY29kZSAtLT4gbmF0aXZlX2xpYnJhcnlcbiAgICBhcHBfY29kZSAtLT4gdHJhY2VyXG4gICAgbmF0aXZlX2xpYnJhcnkgLS0-IGludGVyb3BfdHJhY2VyXG4gICAgaW50ZXJvcF90cmFjZXIgLS0-IHRyYWNlclxuZW5kIiwibWVybWFpZCI6eyJ0aGVtZSI6Im5ldXRyYWwifX0)
 
+<details><summary>Mermaid Code</summary>
+<p>
+
 ```mermaid
 graph LR
 subgraph "Python Application (app.py)"
@@ -87,6 +90,9 @@ subgraph "Python Application (app.py)"
     interop_tracer --> tracer
 end
 ```
+
+</p>
+</details>
 
 ## Test Scenario
 
