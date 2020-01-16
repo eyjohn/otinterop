@@ -99,7 +99,7 @@ style extension fill:#FFA,stroke:#AA0
 
 The "Interop" (Interoperability) Tracer is the main glue that provides the Tracer functionality to the guest platform (SpanContext creation, injection, extraction) as well as collecting the calls to the Tracing API for propagation to the host platform's Tracer.
 
-The implementation of such a Tracer which simply caches tracing calls until they are collected can be found here: [`otinterop_trace.h`](https://github.com/eyjohn/simplehttpclient-python/blob/master/src/otinterop_tracer.h) | [`otinterop_trace.cpp`](https://github.com/eyjohn/simplehttpclient-python/blob/master/src/otinterop_tracer.cpp)
+The implementation of such a Tracer which simply caches tracing calls until they are collected can be found here: [otinterop_tracer.h](https://github.com/eyjohn/simplehttpclient-python/blob/master/src/otinterop_tracer.h) | [otinterop_tracer.cpp](https://github.com/eyjohn/simplehttpclient-python/blob/master/src/otinterop_tracer.cpp)
 
 ### Trace Collection
 
