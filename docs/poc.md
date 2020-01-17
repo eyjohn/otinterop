@@ -189,18 +189,19 @@ The following spans were generated when executing a single request in the scenar
 ### `client.py` Spans
 
 ```python
+# Created by Python application code
 {
   'context': SpanContext(trace_id = '732AF76DCF2843203250BC61441C8894', span_id = 'AAAD2F8051E7231D', sampled = True, baggage = {
-    'key': 'val'
+    'key': 'val' # Set by Python app code when starting the trace
   }),
   'operation_name': 'client',
   'references': [],
   'tags': {
-    'http_status': 200
+    'http_status': 200 # Set by C++ code in extension
   },
   'logs': [],
-  'start_time': 1579006706.5321116,
-  'finish_time': 1579006706.5531337
+  'start_time': 1579006706.5321116, # Started in Python
+  'finish_time': 1579006706.5531337 # Ended in Python
 }
 ```
 
@@ -208,6 +209,7 @@ The following spans were generated when executing a single request in the scenar
 
 
 ```python
+# Created by C++ server extension code
 {
   'context': SpanContext(trace_id = '732AF76DCF2843203250BC61441C8894', span_id = 'C82DDAB4D840EF5A', sampled = True, baggage = {
     'key': 'val'
@@ -215,21 +217,22 @@ The following spans were generated when executing a single request in the scenar
   'operation_name': 'simplehttpserver.handlerequest',
   'references': [Reference(type = 'child_of', referenced_context = SpanContext(trace_id = '732AF76DCF2843203250BC61441C8894', span_id = 'AAAD2F8051E7231D', sampled = True, baggage = {
     'key': 'val'
-  }))],
+  }))], # Injected and extracted in C++ code
   'tags': {
-    'target': '/hello',
-    'http_status': 200,
-    'app_tag': 'value'
+    'target': '/hello', # Set by C++ server extension code
+    'http_status': 200, # Set by C++ client extension code
+    'app_tag': 'value'  # Set by Python application code
   },
   'logs': [],
-  'start_time': 1579006706.5438802,
-  'finish_time': 1579006706.5522382
+  'start_time': 1579006706.5438802, # Started in C++
+  'finish_time': 1579006706.5522382 # Ended in C++
 }
 ```
 
 ### `ping_servie.py` Spans
 
 ```python
+# Created by C++ server extension code
 {
   'context': SpanContext(trace_id = '732AF76DCF2843203250BC61441C8894', span_id = '55BE61E775077D25', sampled = True, baggage = {
     'key': 'val'
@@ -237,13 +240,13 @@ The following spans were generated when executing a single request in the scenar
   'operation_name': 'simplehttpserver.handlerequest',
   'references': [Reference(type = 'child_of', referenced_context = SpanContext(trace_id = '732AF76DCF2843203250BC61441C8894', span_id = 'C82DDAB4D840EF5A', sampled = True, baggage = {
     'key': 'val'
-  }))],
+  }))], # Injected and extracted in C++ code
   'tags': {
-    'target': '/ping'
+    'target': '/ping' # Set by C++ Server Code
   },
   'logs': [],
-  'start_time': 1579006706.5502484,
-  'finish_time': 1579006706.5506222
+  'start_time': 1579006706.5502484, # Started in c++
+  'finish_time': 1579006706.5506222 # Ended in c++
 }
 ```
 
