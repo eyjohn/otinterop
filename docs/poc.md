@@ -4,6 +4,8 @@
 
 This PoC (proof of concept) describes how OpenTracing can be supported in an environment that mixes a Python with native extensions that utilise the native C++ implementation, which will be referred to as a **mixed platform** application environment. These ideas apply to other scenarios such as native Node.js modules or even across tightly coupled process barriers (e.g. fork/exec).
 
+The term **platform** in this document refers to the application code executed within a specific environment. For example, C++ code which is compiled and executed natively, Python code interpreted and executed by the Python interpreter or Java code which is compiled and executed by the JVM. The term is NOT used to refer to the executing runtime (Python interpreter or JVM). This PoC does not require any changes or tracing support from any executing runtime and applies only to the tracing frameworks, in this case OpenTracing.
+
 ## Background Reading
 
 This POC builds upon the concepts described in the [OpenTracing Specification](https://opentracing.io/specification/) and requires an understanding of Distributed Tracing. The book [Mastering Distributed Tracing](https://www.oreilly.com/library/view/mastering-distributed-tracing/9781788628464/) is a great resource for learning about Distributed Tracing fundamentals.
