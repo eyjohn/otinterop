@@ -263,3 +263,9 @@ The `finish()` of the C++ created Span is not currently collected until the next
 A Span originating in one platform and being propagated into another may have finish invoked by both platforms, as both will currently "close" the span. This can be addressed by either:
 1. Preventing a platform form closing spans that originated from another platform
 2. **Preferred** Propagate the span closing behaviour using the Scope object, allowing the scope to trigger the `finish()` (or not). This behaviour would need to be observable on the Scope object.
+
+### This PoC currently only works for statically linked extensions
+
+The current extensions are not able to share a Tracer, which could happen in an environment with shared libraries. The test scenario was executed against the extension linked statically by passing `STATIC=1` as the parameter to the build when running either `make` or `pip install`.
+
+Enabling extensions to share a single Tracer is out of the scope of this PoC but can be achieved by exposing the logic in `otinterop::Tracer` into a public library that both of the extensions use and accounting for multi-threading.
